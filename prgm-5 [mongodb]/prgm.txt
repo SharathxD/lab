@@ -1,0 +1,38 @@
+# insert 
+
+db.users.insertMany([
+  { name: "A", age: 21, status: "active", city: "Hyd" },
+  { name: "B", age: 25, status: "inactive", city: "Delhi" },
+  { name: "C", age: 30, status: "active", city: "Hyd" },
+  { name: "D", age: 28, status: "inactive", city: "Mumbai" },
+  { name: "E", age: 22, status: "active", city: "Delhi" }
+])
+
+
+# count
+
+db.users.countDocuments({})
+
+
+# Sort
+
+db.users.find().sort({ age: 1 })
+
+
+# limit
+
+db.users.find().limit(2)
+  
+#skip
+
+db.users.find().skip(2)
+
+
+# aggregate 
+
+db.users.aggregate([
+  { $match: { status: "active" } },
+  { $group: { _id: "$city", total: { $sum: 1 } } }
+])
+
+
