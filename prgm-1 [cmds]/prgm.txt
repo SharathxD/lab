@@ -1,0 +1,15 @@
+# add
+
+hdfs dfs -mkdir /data
+hdfs dfs -put localfile.txt /data/
+
+
+# retrieve
+
+hdfs dfs -get /data/localfile.txt .
+
+
+# delete 
+
+hdfs dfs -rm /data/localfile.txt
+hdfs dfs -rmdir /data
