@@ -1,51 +1,22 @@
 import org.apache.hadoop.io.LongWritable;
-
 import org.apache.hadoop.io.Text;
-
 import org.apache.hadoop.mapreduce.Mapper;
-
-
-
 public class TagsMapper extends Mapper<LongWritable, Text, Text, Text> {
-
     @Override
-
     protected void map(LongWritable key, Text value, Context context)
-
             throws java.io.IOException, InterruptedException {
-
         String line = value.toString().trim();
-
         if (line.isEmpty()) return;
-
-
-
         // Skip header
-
         if (line.toLowerCase().startsWith("userid")) return;
-
-
-
         String[] parts = line.split(",", 4);
-
         if (parts.length < 3) return;
-
-
-
         String movieId = parts[1].trim();
-
         String tag = parts[2].trim();
-
-
-
         if (!movieId.isEmpty() && !tag.isEmpty()) {
-
             context.write(new Text(movieId), new Text(tag));
-
         }
-
     }
-
 }
 
 ================================================
