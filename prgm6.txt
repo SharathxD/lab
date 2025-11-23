@@ -1,0 +1,21 @@
+-- FILTER
+people = LOAD 'people_data.txt' USING PigStorage(',') AS (name:chararray, age:int, city:chararray);
+filtered = FILTER people BY age > 25;
+DUMP filtered;
+
+-- PROJECT
+projected = FOREACH people GENERATE name, city;
+DUMP projected;
+
+-- GROUP
+grouped = GROUP people BY city;
+DUMP grouped;
+
+-- SORT
+sorted = ORDER people BY age DESC;
+DUMP sorted;
+
+-- JOIN
+city_data = LOAD 'city_data.txt' USING PigStorage(',') AS (city:chararray, population:int, state:chararray);
+joined = JOIN people BY city, city_data BY city;
+DUMP joined
